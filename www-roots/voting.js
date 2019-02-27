@@ -19,8 +19,12 @@ $(document).ready(function () {
 
 function voteForCandidate() {
   candidateName = $("#candidate").val();
-
-  contractInstance.voteForCandidate(candidateName, { from: web3.eth.accounts[0] }, function () {
-    window.location.reload();
-  });
+  var candidateNames = Object.keys(candidates);
+  if(!candidateNames.includes(candidateName)) {
+    alert('Unable to vote on ' + candidateName);
+  } else {
+    contractInstance.voteForCandidate(candidateName, { from: web3.eth.accounts[0] }, function () {
+      window.location.reload();
+    });
+  }
 }
